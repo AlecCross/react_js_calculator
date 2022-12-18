@@ -1,8 +1,4 @@
-import {
-  useState,
-  useRef
-} from "react"
-import "./App.css"
+import { useState, useRef } from "react"
 import Button from "./components/Button"
 
 function App() {
@@ -10,35 +6,34 @@ function App() {
   const resultRef = useRef(null)
   const [result, setResult] = useState(0)
 
-  function plus(e) {
+  function add(e) {
     e.preventDefault()
     setResult((result) => result + Number(inputRef.current.value))
   }
 
-  function minus(e) {
-    // Add the code for the minus function 
+  function subtract(e) {
     e.preventDefault()
     setResult((result) => result - Number(inputRef.current.value))
   }
 
   function multiply(e) {
-    // Add the code for the plus function
     e.preventDefault()
-    setResult((result) => result * Number(inputRef.current.value)) 
+    setResult((result) => result * Number(inputRef.current.value))
   }
 
   function divide(e) {
-    // Add the code for the divide function 
     e.preventDefault()
     setResult((result) => result / Number(inputRef.current.value))
   }
 
   function resetInput(e) {
-    // Add the code for the resetInput function 
+    e.preventDefault()
+    inputRef.current.value = 0
   }
 
   function resetResult(e) {
-    // Add the code for the resetResult function 
+    e.preventDefault()
+    setResult((result) => result * 0)
   }
 
   return (
@@ -48,24 +43,22 @@ function App() {
       </div>
       <form>
         <p ref={resultRef}>
-          {/* add the value of the current total */}
+          {result}
         </p>
-
         <input
           pattern="[0-9]"
           ref={inputRef}
           type="number"
           placeholder="Type a number"
         />
-        <button onClick={plus}>add</button>
-        {/* Add the subtract button */}
-        <Button onClick={minus} text={"-"}/>
-        {/* Add the multiply button */}
-        <Button onClick={plus} text={"*"}/>
-        {/* Add the divide button */}
-        <Button onClick={divide} text={"/"}/>
-        {/* Add the resetInput button */}
-        {/* Add the resetResult button */}
+        <div style={{paddingTop: 10}}>
+          <Button text={"add"} onClick={add} />
+          <Button text={"subtract"} onClick={subtract} />
+          <Button text={"multiply"} onClick={multiply} />
+          <Button text={"divide"} onClick={divide} />
+          <Button text={"reset input"} onClick={resetInput} isReset />
+          <Button text={"reset result"} onClick={resetResult} isReset />
+        </div>
       </form>
     </div>
   )
